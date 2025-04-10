@@ -1,4 +1,4 @@
-﻿﻿@model IEnumerable<Business.Dtos.ClientDto>
+﻿@model IEnumerable<Business.Dtos.ClientDto>
 
 
 @{
@@ -28,7 +28,7 @@
                             <a href="javascript:void(0)" class="more-avatar" data-dropdown="true" data-target="#dropdown-@client.Id">
                                 <img src="~/images/More.svg" alt="More icon" class="more-icon">
                             </a>
-                            <p class="title-text"> @client.JobTitle</p>
+                            <p class="title-text"> @client.Address</p>
                             <p>@client.Email</p>
                             <p>@client.Phone</p>
                             <button class="message-btn">Message</button>
