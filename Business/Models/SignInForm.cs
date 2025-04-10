@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace Business.Models;
 
-public class SignUpForm
+public class SignInForm
 {
-    [Required]
-    public string FirstName { get; set; } = null!;
-    [Required]
-    public string LastName { get; set; } = null!;
+
     [Required]
     public string Email { get; set; } = null!;
+
     [Required]
     public string Password { get; set; } = null!;
+
+    public bool RememberMe { get; set; }
 
 }
