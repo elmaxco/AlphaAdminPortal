@@ -14,7 +14,7 @@ builder.Services.AddIdentity<UserEntity, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
     options.User.RequireUniqueEmail = true;
-    options.Password.RequiredLength = 8;
+    options.Password.RequiredLength = 6;
     options.Password.RequireUppercase = true;
     options.Password.RequireNonAlphanumeric = true;
 

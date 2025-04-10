@@ -19,7 +19,7 @@ public class ProjectsController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var projects = await _projectService.GetAllProjectsAsync();
+        var projects = await _projectService.GetProjectsAsync();
         return View("~/Views/Admin/projects.cshtml",projects);
     }
 

@@ -9,7 +9,7 @@ using Data.Interfaces;
 
 namespace Business.Services;
 
-public class ProjectService 
+public class ProjectService : IProjectService
 {
     private readonly IProjectRepository _projectRepository;
 
@@ -66,7 +66,7 @@ public class ProjectService
         return projects;
     }
 
-    public async Task<bool> UpdateProjectAsync(int id, ProjectUpdateDto dto)
+    public async Task<bool> UpdateProjectAsync(ProjectUpdateDto dto, int id)
     {
 
         ArgumentNullException.ThrowIfNull(dto);
