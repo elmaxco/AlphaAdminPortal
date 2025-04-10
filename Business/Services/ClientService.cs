@@ -48,8 +48,9 @@ public class ClientService : IClientService
     public async Task<IEnumerable<ClientDto?>> GetAllClientsAsync()
     {
         var entities = await _clientRepository.GetAllAsync();
-        var clients = entities.Select(ClientFactory.Create).Where(c => c != null)!;
-        return clients!;
+
+        var statusDtos = entities.Select(ClientFactory.Create).Where(dto => dto != null).ToList();
+        return statusDtos;
     }
 
     public async Task<ClientDto?> GetClientAsync(int id)
@@ -59,7 +60,7 @@ public class ClientService : IClientService
             return null!;
 
         var clientDto = ClientFactory.Create(entities);
-        return clientDto!;
+        return clientDto;
     }
 
     public async Task<bool> UpdateClientAsync(ClientUpdateDto form)
