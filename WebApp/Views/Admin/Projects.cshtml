@@ -1,61 +1,118 @@
-﻿@model IEnumerable<Business.Models.Project>
+﻿﻿@model IEnumerable<Business.Dtos.ProjectDto>
 
-﻿@{
+
+@{
     ViewData["Title"] = "Projects";
 }
 
 <section id="clients">
     <header class="page-headline">
         <h1 class="h2">@ViewData["Title"]</h1>
-        <button data-modal="true" data-target="#addProjectModal" class="btn btn-blue btn-add" type="button">Add Project</button>
-
+        <button data-modal="true" data-target="#addProjectModal" class="btn btn-blue btn-add" type="button">Add Project</button>     
     </header>
-
+   
     <main class="content">
-        <div class="surface"> 
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Project Name</th>
-                            <th>Client</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (Model != null)
+        <div class="surface">
+            
+            <a class="project-links" href="@Url.Action("Index", "Projects")">All</a>
+
+            <a class="project-links" href="@Url.Action("Index", "Projects", new { status = false })">Ongoing</a>
+
+            <a class="project-links" href="@Url.Action("Index", "Projects", new { status = true })">Completed</a>
+
+            <div class="projects-list">
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var project in Model)
+                    {
+                        var endDate = project.EndDate;
+                        var remainingTime = endDate.HasValue ? endDate.Value - DateTime.Now : TimeSpan.Zero;
+
+                        string timeLeftMessage;
+
+                        if (project.Status)
                         {
-                             @foreach (var project in Model)
-                        
-                         {
-                            <tr>
-                                <td>@project.Name</td>
-                                <td>@project.Client</td>
-                                <td>@project.StartDate</td>
-                                <td>@project.EndDate</td>
-                                <td>
-                                    <a href="@Url.Action("Edit", "Projects", new { id = project.Id })" class="btn btn-blue">Edit</a>
-                                    <a href="@Url.Action("Details", "Projects", new { id = project.Id })" class="btn btn-blue">Details</a>
-                                    <a href="@Url.Action("Delete", "Projects", new { id = project.Id })" class="btn btn-blue">Delete</a>
-                                </td>
-                            </tr>
-                         } 
+                            timeLeftMessage = "Project Completed";
+                        }
+                        else if (endDate.HasValue && remainingTime.TotalDays > 0)
+                        {
+                            timeLeftMessage = $"{Math.Ceiling(remainingTime.TotalDays)} day{(remainingTime.TotalDays > 1 ? "s" : "")} left";
+                        }
+                        else if (endDate.HasValue && remainingTime.TotalDays <= 0)
+                        {
+                            timeLeftMessage = "Project Overdue";
                         }
                         else
-                        {                        
-                            <tr><td colspan="3">No projects available.</td></tr>                        
+                        {
+                            timeLeftMessage = "Ongoing";
                         }
-                      
-                    </tbody>
-                </table>
+
+                        <div class="project-item">
+                            <div class="title-row">
+                                <img src="~/images/Alpha-portal-project-icons/purple-red.svg" class="project-icon" />
+                                <div>
+                                    <h3>@project.Name</h3>                                  
+                                    <h6 class="client-text">@project.ClientName</h6>
+                                       
+                                </div>
+
+                                <a href="javascript:void(0)" class="more-avatar" data-dropdown="true" data-target="#dropdown-@project.Id">
+                                    <img src="~/images/More.svg" alt="More icon" class="more-icon">
+                                </a>
+                                                                                                     
+                               
+                            </div>
+                            <p>@project.Description</p>
+                            <p class="time-left"><i class="fa fa-clock"></i> @timeLeftMessage</p>
+                           
+                            
+                            
+
+                            @*Skapa med hjälp av ChatGPT*@
+
+                            <div class="more-dropdown-content" id="dropdown-@project.Id" style="display:none;">
+                              
+                                <button 
+                                    data-modal="true" 
+                                    data-target="#updateProjectModal"
+                                    data-id="@project.Id"
+                                    data-name="@project.Name"
+                                    data-client="@project.ClientName"
+                                    data-description="@project.Description"
+                                    data-start="@project.StartDate.ToString("yyyy-MM-dd")"
+                                    data-end="@project.EndDate?.ToString("yyyy-MM-dd")"
+                                        data-budget="@project.Budget?.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)"
+                                        data-status="@project.Status.ToString().ToLower()"
+                                    id="logout" 
+                                    type="button" 
+                                    class="dropdown-btn edit-button">
+                                    <i class="fas fa-pen"></i> <span class="edit-text">Edit</span>
+                                </button>
+
+                                <button id="logout" type="button" class="dropdown-btn">
+                                    <i class="fas fa-user-plus"></i><span class="member-text">Add Member</span>
+                                </button>
+
+                                <button id="logout" type="button" class="dropdown-btn delete-button" data-project-id="@project.Id">
+                                    <i class="fas fa-trash"></i> <span class="delete-text">Delete Project</span>
+                                </button>
+                            </div>
+                       
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>No projects available.</p> 
+                }
+               
             </div>
-                                                
-        
+
+         
         </div>
     </main>
 
 </section>
 
-<partial name="Partials/Modals/_AddProjectModal"  />
+<partial name="Partials/Modals/_AddProjectModal" model="new Business.Models.AddProjectForm()" />
+<partial name="Partials/Modals/_UpdateProjectModal" model="new Business.Models.UpdateProjectForm()" />
