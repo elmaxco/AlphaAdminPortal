@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Clients";
+}
+
+<section id="clients">
+    <header class="page-headline">
+        <h1 class="h2">@ViewData["Title"]</h1>
+        <button data-modal="true" data-target="#addClientModal" class="btn btn-blue btn-add" type="button">Add Client</button>
+    </header>
+
+    <main class="content">
+        <div class="surface">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Client Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            @foreach (var client in Model)
+                            {
+                                <tr>
+                                    <td>@client.Name</td>
+                                    <td>
+                                        <a href="@Url.Action("Edit", "Clients", new { id = client.Id })" class="btn btn-blue">Edit</a>
+                                        <a href="@Url.Action("Details", "Clients", new { id = client.Id })" class="btn btn-blue">Details</a>
+                                        <a href="@Url.Action("Delete", "Clients", new { id = client.Id })" class="btn btn-blue">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td colspan="3">No clients available.</td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </main>
+
+</section>
+
+<partial name="Partials/Modals/_AddClientModal" />
