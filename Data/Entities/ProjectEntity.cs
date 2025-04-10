@@ -15,5 +15,6 @@ public class ProjectEntity
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public decimal? Budget { get; set; }
+    public bool Status { get; set; } // true = active, false = inactive
 
 }

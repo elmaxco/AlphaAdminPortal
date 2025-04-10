@@ -1,12 +1,11 @@
-﻿using Business.Interfaces;
+﻿using Business.Dtos;
+using Business.Factories;
+using Business.Interfaces;
+using Business.Models;
 using Data.Entities;
 using Data.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Business.Services;
 
@@ -94,7 +93,7 @@ public class StatusService : IStatusService
             if (entity == null)
                 return false;
 
-            var result = await _statusRepository.DeleteAsync(entity);
+            var result = await _statusRepository.RemoveAsync(entity);
             return result;
         }
         catch (Exception ex)
