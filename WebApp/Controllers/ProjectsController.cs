@@ -17,10 +17,15 @@ public class ProjectsController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(bool? status)
     {
         var projects = await _projectService.GetProjectsAsync();
-        return View("~/Views/Admin/projects.cshtml",projects);
+
+        if (status.HasValue)
+        {
+            projects = projects.Where(p => p.Status == status.Value).ToList();
+        }
+        return View("~/Views/Admin/projects.cshtml", projects);
     }
 
     [HttpGet("details/{id}")]
@@ -47,7 +52,10 @@ public class ProjectsController : Controller
             return BadRequest(new { errors });
         }
         var result = await _projectService.CreateProjectAsync(form);
-        return Ok();
+        if (result == 200)
+            return Ok();
+
+        return StatusCode(result);
     }
 
     [HttpPost("admin/projects/{id}")]

@@ -1,4 +1,4 @@
-﻿function showValidationErrors(errors) {
+﻿/*function showValidationErrors(errors) {
     for (const field in errors) {
         const messages = errors[field];
         const fieldElement = document.querySelector(`[name="${field}"]`);
@@ -13,4 +13,4 @@
             errorElement.innerHTML = messages.join("<br/>");
         }
     }
-}
+}*/

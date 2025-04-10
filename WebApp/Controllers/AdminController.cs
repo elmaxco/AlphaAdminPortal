@@ -1,13 +1,12 @@
 ﻿using Business.Interfaces;
-using Business.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Client;
 
 namespace WebApp.Controllers;
 
 
 [Route("admin")]
+[Authorize]
 public class AdminController : Controller
 {
     private readonly IProjectService _projectService;

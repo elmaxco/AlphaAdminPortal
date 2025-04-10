@@ -38,7 +38,7 @@ public class ClientsController : Controller
 
         var result = await _clientService.CreateClientAsync(form);
         if (result == 200)
-            return RedirectToAction("Index"); 
+            return Ok();
 
         return StatusCode(result);
     }
