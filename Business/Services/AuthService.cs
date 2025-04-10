@@ -1,4 +1,5 @@
-﻿using Business.Models;
+﻿using Business.Interfaces;
+using Business.Models;
 using Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -9,14 +10,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Business.Services;
-
-public interface IAuthService
-{
-    Task<bool> LoginAsync(string email, string password, bool rememberMe = false);
-    Task LogoutAsync();
-    Task<IdentityResult> SignUpAsync(SignUpDto dto, string roleName = "User");
-    Task<bool> UserExistsAsync(string email);
-}
 
 public class AuthService(SignInManager<UserEntity> signInManager, UserManager<UserEntity> userManager) : IAuthService
 {
