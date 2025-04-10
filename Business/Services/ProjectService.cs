@@ -9,7 +9,7 @@ using Data.Interfaces;
 
 namespace Business.Services;
 
-public class ProjectService : IProjectService
+public class ProjectService 
 {
     private readonly IProjectRepository _projectRepository;
 
