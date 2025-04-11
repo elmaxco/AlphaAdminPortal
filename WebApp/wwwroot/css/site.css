@@ -1059,3 +1059,18 @@ section > .content {
         justify-content: center;
         margin-top: 2rem;
     }
+
+#login .remember-me {
+    text-align: left;
+    justify-content: flex-start;
+    display: flex;
+}
+
+    #login .remember-me label {
+        white-space: nowrap;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        gap: 8px;
+    }

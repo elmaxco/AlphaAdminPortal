@@ -23,12 +23,12 @@ public class AddProjectForm
     [DataType(DataType.Date)]
     [Display(Name = "Start Date", Prompt = "Start date")]
     [Required(ErrorMessage = "Required")]
-    public DateTime StartDate { get; set; }
+    public DateTime StartDate { get; set; } = DateTime.Now;
 
     [DataType(DataType.Date)]
     [Display(Name = "End Date", Prompt = "End date")]
     [Required(ErrorMessage = "Required")]
-    public DateTime EndDate { get; set; }
+    public DateTime EndDate { get; set; } = DateTime.Now.AddDays(10);
 
     [DataType(DataType.Currency)]
     [Display(Name = "Budget", Prompt = "Budget")]

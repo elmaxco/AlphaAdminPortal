@@ -25,7 +25,7 @@ public class ProjectsController : Controller
         {
             projects = projects.Where(p => p.Status == status.Value).ToList();
         }
-        return View("~/Views/Admin/projects.cshtml", projects);
+        return View("~/Views/Admin/Projects.cshtml", projects);
     }
 
     [HttpGet("details/{id}")]

@@ -16,7 +16,7 @@ public class AuthService(SignInManager<UserEntity> signInManager, UserManager<Us
     private readonly SignInManager<UserEntity> _signInManager = signInManager;
     private readonly UserManager<UserEntity> _userManager = userManager;
 
-    public async Task<bool> LoginAsync(string email, string password, bool rememberMe = false)
+    public async Task<bool> LoginAsync(string email, string password, bool rememberMe)
     {
         var result = await _signInManager.PasswordSignInAsync(email, password, rememberMe, false);
         return result.Succeeded;

@@ -167,10 +167,10 @@ function initDeleteButtons() {
         });
     });
 }
-//genererat med chatgpt
 function initDropdownToggles() {
 
-    
+    // En metod som är genererad av ChatGPT 4, dess funktion är att
+    // öppna och stänga dropdown-menyer som finns i projects.cshtml.
     const dropdownButtons = document.querySelectorAll(".more-avatar");
 
     dropdownButtons.forEach(button => {
@@ -197,7 +197,7 @@ function initDropdownToggles() {
 
         });
     });
-   
+    // Stänger dropdown när man klickar utanför
     document.addEventListener("click", function (event) {
         document.querySelectorAll(".more-dropdown-content").forEach(dropdown => {
             if (!dropdown.contains(event.target) && !event.target.closest(".more-avatar")) {
@@ -219,7 +219,7 @@ function initDropdowns() {
 
             if (!dropdown) return;
 
-            
+            //normal toggle for logindropdown
             if (target === "#loginPartialContainer") {
                 dropdown.classList.toggle('hidden');
                 return;

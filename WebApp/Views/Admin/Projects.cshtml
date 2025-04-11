@@ -16,9 +16,9 @@
             
             <a class="project-links" href="@Url.Action("Index", "Projects")">All</a>
 
-            <a class="project-links" href="@Url.Action("Index", "Projects", new { status = false })">Ongoing</a>
+            <a class="project-links" href="@Url.Action("Index", "Projects", new { status = false })">In progress</a>
 
-            <a class="project-links" href="@Url.Action("Index", "Projects", new { status = true })">Completed</a>
+            <a class="project-links" href="@Url.Action("Index", "Projects", new { status = true })">Finished</a>
 
             <div class="projects-list">
                 @if (Model != null && Model.Any())
@@ -49,7 +49,7 @@
 
                         <div class="project-item">
                             <div class="title-row">
-                                <img src="~/images/Alpha-portal-project-icons/purple-red.svg" class="project-icon" />
+                                <img src="~/images/avatars/Project-icons/lime.svg" class="project-icon" />
                                 <div>
                                     <h3>@project.Name</h3>                                  
                                     <h6 class="client-text">@project.ClientName</h6>
@@ -57,7 +57,7 @@
                                 </div>
 
                                 <a href="javascript:void(0)" class="more-avatar" data-dropdown="true" data-target="#dropdown-@project.Id">
-                                    <img src="~/images/More.svg" alt="More icon" class="more-icon">
+                                    <img src="~/images/avatars/Project-icons/More.svg" alt="More icon" class="more-icon">
                                 </a>
                                                                                                      
                                
@@ -89,9 +89,7 @@
                                     <i class="fas fa-pen"></i> <span class="edit-text">Edit</span>
                                 </button>
 
-                                <button id="logout" type="button" class="dropdown-btn">
-                                    <i class="fas fa-user-plus"></i><span class="member-text">Add Member</span>
-                                </button>
+                               
 
                                 <button id="logout" type="button" class="dropdown-btn delete-button" data-project-id="@project.Id">
                                     <i class="fas fa-trash"></i> <span class="delete-text">Delete Project</span>

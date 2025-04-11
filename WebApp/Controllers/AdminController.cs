@@ -40,7 +40,7 @@ public class AdminController : Controller
     public async Task<IActionResult> Clients()
     {
         var clients = await _clientService.GetAllClientsAsync();
-        return View();
+        return View("clients",  clients);
     }
 
     [Route("statuses")]
